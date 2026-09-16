@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TASUZ CLOTHES - Eng Yaxshi Kiyim Do'koni</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-crown"></i>
+                <span>TASUZ CLOTHES</span>
+            </div>
+            <div class="nav-menu">
+                <a href="#home" class="nav-link active">Bosh sahifa</a>
+                <a href="#products" class="nav-link">Mahsulotlar</a>
+                <a href="#categories" class="nav-link">Kategoriyalar</a>
+                <a href="#about" class="nav-link">Biz haqida</a>
+                <a href="#contact" class="nav-link">Bog'lanish</a>
+            </div>
+            <div class="nav-icons">
+                <button class="search-btn" id="searchBtn"><i class="fas fa-search"></i></button>
+                <button class="cart-btn" id="cartBtn"><i class="fas fa-shopping-cart"></i><span class="cart-count">0</span></button>
+                <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Modal -->
+    <div class="search-modal" id="searchModal">
+        <div class="search-content">
+            <input type="text" placeholder="Qidiruv..." id="searchInput" class="search-input">
+            <button class="close-search" id="closeSearch"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">TASUZ CLOTHES</h1>
+            <p class="hero-subtitle">Siz uchun eng yangi va eng zamonaviy kiyimlar</p>
+            <button class="hero-btn" onclick="document.getElementById('products').scrollIntoView({behavior: 'smooth'})">
+                Xaridor qiling <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+        <div class="hero-background">
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+            <div class="blob blob-3"></div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section id="categories" class="categories">
+        <div class="section-header">
+            <h2>Kategoriyalar</h2>
+            <p>O'zingiz uchun to'g'ri kategoriyani tanlang</p>
+        </div>
+        <div class="categories-grid">
+            <div class="category-card glass" onclick="filterProducts('erkak')">
+                <i class="fas fa-user-tie"></i>
+                <h3>Erkaklar Kiyimi</h3>
+                <p>50+ mahsulot</p>
+            </div>
+            <div class="category-card glass" onclick="filterProducts('ayol')">
+                <i class="fas fa-user-secret"></i>
+                <h3>Ayollar Kiyimi</h3>
+                <p>75+ mahsulot</p>
+            </div>
+            <div class="category-card glass" onclick="filterProducts('bola')">
+                <i class="fas fa-child"></i>
+                <h3>Bolalar Kiyimi</h3>
+                <p>40+ mahsulot</p>
+            </div>
+            <div class="category-card glass" onclick="filterProducts('sport')">
+                <i class="fas fa-dumbbell"></i>
+                <h3>Sport Kiyimi</h3>
+                <p>60+ mahsulot</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products">
+        <div class="section-header">
+            <h2>Bizning Mahsulotlar</h2>
+            <p>Eng yangi koleksiyamiz</p>
+        </div>
+
+        <!-- Filter Buttons -->
+        <div class="filter-buttons">
+            <button class="filter-btn active" onclick="filterProducts('all')">Barchasi</button>
+            <button class="filter-btn" onclick="filterProducts('erkak')">Erkaklar</button>
+            <button class="filter-btn" onclick="filterProducts('ayol')">Ayollar</button>
+            <button class="filter-btn" onclick="filterProducts('bola')">Bolalar</button>
+            <button class="filter-btn" onclick="filterProducts('sport')">Sport</button>
+        </div>
+
+        <div class="products-grid" id="productsGrid">
+            <!-- Products will be inserted here by JavaScript -->
+        </div>
+    </section>
+
+    <!-- Special Offer Section -->
+    <section class="special-offer">
+        <div class="offer-content glass">
+            <h2>Maxsus Taklif!</h2>
+            <p>Bugun <span class="discount">40% CHEGIRMA</span> olun!</p>
+            <p class="offer-desc">Barcha erkaklar kiyimiga chegirma qo'llaniladi</p>
+            <button class="offer-btn">Hoziroq Xarid Qil</button>
+        </div>
+    </section>
+
+    <!-- Cart Section -->
+    <section id="cart-section" class="cart-section hidden">
+        <div class="cart-container glass">
+            <div class="cart-header">
+                <h2>Savat</h2>
+                <button class="close-cart" onclick="toggleCart()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <!-- Cart items will be inserted here -->
+            </div>
+            <div class="cart-summary">
+                <div class="summary-row">
+                    <span>Jami:</span>
+                    <span id="cartTotal">0 UZS</span>
+                </div>
+                <button class="checkout-btn">To'lov Qil</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="section-header">
+            <h2>Biz Haqida</h2>
+            <p>TASUZ CLOTHES - Sifat va Stil</p>
+        </div>
+        <div class="about-grid">
+            <div class="about-card glass">
+                <i class="fas fa-shipping-fast"></i>
+                <h3>Tez Yetkazish</h3>
+                <p>Barcha buyurtmalar 24 soat ichida yetkaziladi</p>
+            </div>
+            <div class="about-card glass">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Xavfsiz Xarid</h3>
+                <p>100% Xavfsiz to'lov va kafolat</p>
+            </div>
+            <div class="about-card glass">
+                <i class="fas fa-redo"></i>
+                <h3>Qaytarish Imkoni</h3>
+                <p>30 kun ichida qaytarish xizmati</p>
+            </div>
+            <div class="about-card glass">
+                <i class="fas fa-headset"></i>
+                <h3>24/7 Qo'llab-Quvvatlash</h3>
+                <p>Har doim sizga yordam berishga tayyor</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="section-header">
+            <h2>Biz Bilan Bog'lanish</h2>
+            <p>Savollaringiz bor? Biz shu yerda turibmiz</p>
+        </div>
+        <div class="contact-container">
+            <div class="contact-form glass">
+                <input type="text" placeholder="Ismingiz" class="form-input" required>
+                <input type="email" placeholder="Email" class="form-input" required>
+                <textarea placeholder="Xabar" class="form-textarea" rows="5" required></textarea>
+                <button class="submit-btn">Xabar Jo'natish</button>
+            </div>
+            <div class="contact-info">
+                <div class="info-card glass">
+                    <i class="fas fa-phone"></i>
+                    <h3>Telefon</h3>
+                    <p>+998 (99) 123-45-67</p>
+                </div>
+                <div class="info-card glass">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Email</h3>
+                    <p>info@tasuzclothes.uz</p>
+                </div>
+                <div class="info-card glass">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Manzil</h3>
+                    <p>Tashkent, O'zbekiston</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>TASUZ CLOTHES</h4>
+                <p>Sifat, stil va samaradorlik bilamiz</p>
+            </div>
+            <div class="footer-section">
+                <h4>Tezkor Havolalar</h4>
+                <ul>
+                    <li><a href="#home">Bosh sahifa</a></li>
+                    <li><a href="#products">Mahsulotlar</a></li>
+                    <li><a href="#about">Biz haqida</a></li>
+                    <li><a href="#contact">Bog'lanish</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Ijtimoiy Tarmoqlar</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 TASUZ CLOTHES. Barcha huquqlar himoyalangan. | Dizayn va Ishlab Chiqarish: @ozodbekummatqulov18-beep</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
